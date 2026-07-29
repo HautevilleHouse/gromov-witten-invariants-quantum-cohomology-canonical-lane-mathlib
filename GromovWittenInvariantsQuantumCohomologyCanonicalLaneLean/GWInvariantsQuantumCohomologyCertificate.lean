@@ -1,0 +1,26 @@
+import GromovWittenInvariantsQuantumCohomologyCanonicalLaneLean.QuantumCohomologyLayer
+
+namespace HautevilleHouse
+namespace GromovWittenInvariantsQuantumCohomologyCanonicalLaneLean
+
+structure GWInvariantsQuantumCohomologyCertificate where
+  gromovWittenLayer : GromovWittenLayer
+  quantumCohomologyLayer : QuantumCohomologyLayer
+  certificateClosed : Prop
+  certificateClosedProof : certificateClosed
+
+def sourceGWInvariantsQuantumCohomologyCertificate : GWInvariantsQuantumCohomologyCertificate := {
+  gromovWittenLayer := sourceGromovWittenLayer,
+  quantumCohomologyLayer := sourceQuantumCohomologyLayer,
+  certificateClosed := GromovWittenLayerClosed sourceGromovWittenLayer ∧ QuantumCohomologyLayerClosed sourceQuantumCohomologyLayer,
+  certificateClosedProof := And.intro source_gromov_witten_layer_closed source_quantum_cohomology_layer_closed
+}
+
+def GWInvariantsQuantumCohomologyCertificateClosed (C : GWInvariantsQuantumCohomologyCertificate) : Prop :=
+  C.certificateClosed
+
+theorem source_gw_invariants_quantum_cohomology_certificate_closed : GWInvariantsQuantumCohomologyCertificateClosed sourceGWInvariantsQuantumCohomologyCertificate :=
+  sourceGWInvariantsQuantumCohomologyCertificate.certificateClosedProof
+
+end GromovWittenInvariantsQuantumCohomologyCanonicalLaneLean
+end HautevilleHouse
